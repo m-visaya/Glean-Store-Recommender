@@ -5,7 +5,7 @@ from mlxtend.frequent_patterns import apriori, association_rules
 
 app = Flask(__name__)
 
-df = pd.read_excel('dataset\GleanInvoice.xlsx')
+df = pd.read_excel('app/dataset/GleanInvoice.xlsx')
 df = df.groupby(['Invoice', 'ProductID'])['Quantity'].sum().unstack().fillna(0).applymap(lambda x: True if x > 0 else False)
 
 freq_itemsets = apriori(df, min_support=0.01, use_colnames=True)
